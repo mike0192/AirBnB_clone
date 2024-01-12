@@ -2,8 +2,10 @@
 
 """ Base model for all the other classes to inherit"""
 
+import models
 from datetime import datetime
 import uuid
+
 
 
 class BaseModel:
@@ -25,12 +27,14 @@ class BaseModel:
 
         time_format = "%Y-%m-%dT%H:%M:%S.%f"
 
-        if kwargs is not None:
+        if kwargs:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
                     setattr(self, key, datetime.strptime(value, time_format))
                 else:
                     self.__dict__[key] = value
+        else:
+            models.storage.new(self)
 
     def __str__(self):
         """ dunder method that returns the human readable
@@ -44,6 +48,7 @@ class BaseModel:
             with the current date time
         """
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """ Method that returns the dictionary containing all keys/values
