@@ -110,7 +110,7 @@ class HBNBCommand(cmd.Cmd):
            by adding or updating an attribute
 
            Usage: update <class name> <id> <attribute name> "<attribute value>"
-=======
+        """
         try:
             if not args:
                 raise SyntaxError()
@@ -144,17 +144,12 @@ class HBNBCommand(cmd.Cmd):
            and saves the change to the JSON file
 
            Usage: destroy <class name> <id>
->>>>>>> ae83e3a3f288fa477a8145916ccefe1022fef5f1
         """
         try:
             if not args:
                 raise SyntaxError()
-
-<<<<<<< HEAD
             split_args = split(args, " ")
-=======
             split_args = args.split(" ")
->>>>>>> ae83e3a3f288fa477a8145916ccefe1022fef5f1
 
             if split_args[0] not in self.model_classes:
                 raise NameError()
@@ -165,7 +160,6 @@ class HBNBCommand(cmd.Cmd):
             model_obj = storage.all()
             key = split_args[0] + '.' + split_args[1]
 
-<<<<<<< HEAD
             if key not in model_obj:
                 raise KeyError()
 
@@ -183,13 +177,11 @@ class HBNBCommand(cmd.Cmd):
                 val.__dict__[split_args[2]] = split_args[3]
                 val.save()
 
-=======
             if key in model_obj:
                 del model_obj[key]
                 storage.save()
             else:
                 raise KeyError()
->>>>>>> ae83e3a3f288fa477a8145916ccefe1022fef5f1
         except SyntaxError:
             print("** class name missing **")
         except NameError:
@@ -198,14 +190,9 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         except KeyError:
             print("** no instance found **")
-<<<<<<< HEAD
         except AttributeError:
             print("** attribute name missing **")
         except ValueError:
             print("** value missing **")
-=======
-
-
->>>>>>> ae83e3a3f288fa477a8145916ccefe1022fef5f1
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
