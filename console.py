@@ -7,6 +7,7 @@ import cmd
 from models.base_model import BaseModel
 from models import storage
 from shlex import split
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
@@ -14,7 +15,8 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
 
     model_classes = {
-            "BaseModel"
+            "BaseModel",
+            "User"
             }
 
     def do_quit(self, args):
@@ -192,6 +194,7 @@ class HBNBCommand(cmd.Cmd):
             print("** attribute name missing **")
         except ValueError:
             print("** value missing **")
+
     def do_all(self, args):
         """
         Command that prints all string representations of all instances
