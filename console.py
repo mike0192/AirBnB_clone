@@ -192,5 +192,34 @@ class HBNBCommand(cmd.Cmd):
             print("** attribute name missing **")
         except ValueError:
             print("** value missing **")
+    def do_all(self, args):
+        """
+        Command that prints all string representations of all instances
+        based or not on the class name
+
+        Usage: all <class name> or all
+        """
+
+        model_obj = storage.all()
+        lists = []
+
+        if not args:
+            for key in model_obj:
+                lists.append(model_obj[key])
+            print(lists)
+            return
+        try:
+            args = args.split(" ")
+            if args[0] not in self.model_classes:
+                raise NameError()
+            for key in model_obj:
+                name = key.split('.')
+                if name[0] == args[0]:
+                    lists.append(model_obj[key])
+            print(lists)
+        except NameError:
+            print("** class doesn't exist **")
+
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
