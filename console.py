@@ -62,12 +62,12 @@ class HBNBCommand(cmd.Cmd):
         except IndexError:
             pass
     def do_show(self, args):
-    """
-    Command that prints the string representation of an instance
-    based on class name and id
+        """
+        Command that prints the string representation of an instance
+        based on class name and id
 
-    Usage: show <class_name> <id>
-    """
+        Usage: show <class_name> <id>
+        """
     try:
         if not args:
             raise SyntaxError()
