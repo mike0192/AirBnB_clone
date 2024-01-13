@@ -6,7 +6,7 @@ from models.base_model import BaseModel
 
 class State(BaseModel):
     """
-       Cass State with empty string
+       Class State with empty string
        public attribute name
     """
 
