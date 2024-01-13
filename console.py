@@ -77,24 +77,22 @@ class HBNBCommand(cmd.Cmd):
         Usage: show <class_name> <id>
         """
         try:
-        if not args:
-            raise SyntaxError()
+            if not args:
+                raise SyntaxError()
+            split_args = args.split(" ")
 
-        split_args = args.split(" ")
+            if split_args[0] not in self.model_classes:
+                raise NameError()
+            if len(split_args) < 2:
+                raise IndexError()
 
-        if split_args[0] not in self.model_classes:
-            raise NameError()
+            model_obj = storage.all()
+            key = split_args[0] + '.' + split_args[1]
 
-        if len(split_args) < 2:
-            raise IndexError()
-
-        model_obj = storage.all()
-        key = split_args[0] + '.' + split_args[1]
-
-        if key in model_obj:
-            print(model_obj[key])
-        else:
-            raise KeyError()
+            if key in model_obj:
+                print(model_obj[key])
+            else:
+                raise KeyError()
         except SyntaxError:
             print("** class name missing **")
         except NameError:
