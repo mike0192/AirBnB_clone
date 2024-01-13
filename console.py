@@ -76,8 +76,7 @@ class HBNBCommand(cmd.Cmd):
 
         Usage: show <class_name> <id>
         """
-<<<<<<< HEAD
-    try:
+        try:
         if not args:
             raise SyntaxError()
 
@@ -96,14 +95,15 @@ class HBNBCommand(cmd.Cmd):
             print(model_obj[key])
         else:
             raise KeyError()
-    except SyntaxError:
-        print("** class name missing **")
-    except NameError:
-        print("** class doesn't exist **")
-    except IndexError:
-        print("** instance id missing **")
-    except KeyError:
-        print("** no instance found **")
+        except SyntaxError:
+            print("** class name missing **")
+        except NameError:
+            print("** class doesn't exist **")
+        except IndexError:
+            print("** instance id missing **")
+        except KeyError:
+            print("** no instance found **")
+
     def do_update(self, args):
         """
            Command that updates an instance based on the class name and id
