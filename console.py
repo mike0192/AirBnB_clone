@@ -95,5 +95,56 @@ class HBNBCommand(cmd.Cmd):
         print("** instance id missing **")
     except KeyError:
         print("** no instance found **")
+    def do_update(self, args):
+        """
+           Command that updates an instance based on the class name and id
+           by adding or updating an attribute
+
+           Usage: update <class name> <id> <attribute name> "<attribute value>"
+        """
+        try:
+            if not args:
+                raise SyntaxError()
+
+            split_args = split(args, " ")
+
+            if split_args[0] not in self.model_classes:
+                raise NameError()
+
+            if len(split_args) < 2:
+                raise IndexError()
+
+            model_obj = storage.all()
+            key = split_args[0] + '.' + split_args[1]
+
+            if key not in model_obj:
+                raise KeyError()
+
+            if len(split_args) < 3:
+                raise AttributeError()
+
+            if len(split_args) < 4:
+                raise ValueError()
+
+            val = model_obj[key]
+
+            try:
+                val.__dict__[split_args[2]] = eval(split_args[3])
+            except Exception:
+                val.__dict__[split_args[2]] = split_args[3]
+                val.save()
+
+        except SyntaxError:
+            print("** class name missing **")
+        except NameError:
+            print("** class doesn't exist **")
+        except IndexError:
+            print("** instance id missing **")
+        except KeyError:
+            print("** no instance found **")
+        except AttributeError:
+            print("** attribute name missing **")
+        except ValueError:
+            print("** value missing **")
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
