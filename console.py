@@ -10,7 +10,23 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb) "
 
-    def do_create(self, arg):
+    def do_quit(self, args):
+        """Quit the program"""
+        "Exit"
+        return True
+
+    def emptyline(self):
+        """Emptyline should be passed and don't do
+           anything
+        """
+        pass
+
+    def do_EOF(self, args):
+        """Exit the program"""
+        "Exit"
+        return True
+
+    def do_create(self, args):
         """
         Creates a new instance of BaseModel, saves it (to the JSON file),
         and prints the id
@@ -46,22 +62,39 @@ class HBNBCommand(cmd.Cmd):
         except IndexError:
             pass
 
-    def do_quit(self, arg):
-        """Quit the program"""
-        "Exit"
-        return True
+     def do_show(self, args):
+        """Command that prints the string representation of an instance
+           based on class name and id
 
-    def emptyline(self):
-        """Emptyline should be passed and don't do
-           anything
+           Usage: show <class_name> <id>
         """
-        pass
+        try:
+            if not args:
+                raise SyntaxError()
 
-    def do_EOF(self, arg):
-        """Exit the program"""
-        "Exit"
-        return True
+            split_args = args.split(" ")
 
+            if split_args[0] not in self.model_classes:
+                raise NameError()
+
+            if len(split_args) < 2:
+                raise IndexError()
+
+            model_obj = storage.all()
+            key = split_args[0] + '.' + split_args[1]
+
+            if key in model_obj:
+                print(model_obj[key])
+            else:
+                raise KeyError()
+        except SyntaxError:
+            print("** class name missing **")
+        except NameError:
+            print("** class doesn't exist **")
+        except IndexError:
+            print("** instance id missing **")
+        except KeyError:
+            print("** no instance found **")
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
