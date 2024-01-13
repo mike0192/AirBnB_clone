@@ -61,40 +61,39 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         except IndexError:
             pass
+    def do_show(self, args):
+    """
+    Command that prints the string representation of an instance
+    based on class name and id
 
-     def do_show(self, args):
-        """Command that prints the string representation of an instance
-           based on class name and id
+    Usage: show <class_name> <id>
+    """
+    try:
+        if not args:
+            raise SyntaxError()
 
-           Usage: show <class_name> <id>
-        """
-        try:
-            if not args:
-                raise SyntaxError()
+        split_args = args.split(" ")
 
-            split_args = args.split(" ")
+        if split_args[0] not in self.model_classes:
+            raise NameError()
 
-            if split_args[0] not in self.model_classes:
-                raise NameError()
+        if len(split_args) < 2:
+            raise IndexError()
 
-            if len(split_args) < 2:
-                raise IndexError()
+        model_obj = storage.all()
+        key = split_args[0] + '.' + split_args[1]
 
-            model_obj = storage.all()
-            key = split_args[0] + '.' + split_args[1]
-
-            if key in model_obj:
-                print(model_obj[key])
-            else:
-                raise KeyError()
-        except SyntaxError:
-            print("** class name missing **")
-        except NameError:
-            print("** class doesn't exist **")
-        except IndexError:
-            print("** instance id missing **")
-        except KeyError:
-            print("** no instance found **")
-
+        if key in model_obj:
+            print(model_obj[key])
+        else:
+            raise KeyError()
+    except SyntaxError:
+        print("** class name missing **")
+    except NameError:
+        print("** class doesn't exist **")
+    except IndexError:
+        print("** instance id missing **")
+    except KeyError:
+        print("** no instance found **")
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
