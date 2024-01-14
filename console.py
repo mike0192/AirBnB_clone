@@ -233,6 +233,22 @@ class HBNBCommand(cmd.Cmd):
         except NameError:
             print("** class doesn't exist **")
 
-
+    def count(self, args):
+        """Class that retrieves the number of instances of a class
+           based on id
+        """
+        count_inst = 0
+        try:
+            lists = split(args, " ")
+            if lists[0] not in self.model_classes:
+                raise NameError()
+            model_obj = storage.all()
+            for key in model_obj:
+                name = key.split('.')
+                if name[0] == lists[0]:
+                    count_inst += 1
+            print(count_inst)
+        except NameError:
+            print("** class doesn't exist **")
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
