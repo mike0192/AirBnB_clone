@@ -265,11 +265,11 @@ class HBNBCommand(cmd.Cmd):
             my_dict = None
         if isinstance(my_dict, dict):
             new_string = args[1][args[1].find('(')+1:args[1].find(')')]
-            new_list.append(((new_str.split(", "))[0]).strip('"'))
+            new_list.append(((new_string.split(", "))[0]).strip('"'))
             new_list.append(my_dict)
             return new_list
         new_string = args[1][args[1].find('(')+1:args[1].find(')')]
-        new_list.append(" ".join(new_str.split(", ")))
+        new_list.append(" ".join(new_string.split(", ")))
         return " ".join(i for i in new_list)
 
     def default(self, args):
