@@ -251,7 +251,7 @@ class HBNBCommand(cmd.Cmd):
         except NameError:
             print("** class doesn't exist **")
 
-    def devide_args(self, args):
+    def divide_args(self, args):
         """Return the command string inside a class
            after stripping
         """
@@ -271,6 +271,32 @@ class HBNBCommand(cmd.Cmd):
         new_string = args[1][args[1].find('(')+1:args[1].find(')')]
         new_list.append(" ".join(new_str.split(", ")))
         return " ".join(i for i in new_list)
+
+    def default(self, args):
+        """Class that retrieves the number of
+           instances
+        """
+        lists = args.split('.')
+        if len(lists) >= 2:
+            if lists[1] == "all()":
+                self.do_all(lists[0])
+            elif lists[1] == "count()":
+                self.count(lists[0])
+            elif lists[1][:4] == "show":
+                self.do_show(self.devide_args(lists))
+            elif lists[1][:7] == "destroy":
+                self.do_destroy(self.devide_args(lists))
+            elif lists[1][:6] == "update":
+                line_args = self.devide_args(lists)
+                if isinstance(line_args, list):
+                    model_obj = storage.all()
+                    k = args[0] + ' ' + args[1]
+                    for key, value in args[2].items():
+                        self.do_update(k + ' "{}" "{}"'.format(key, value))
+                else:
+                    self.do_update(line_args)
+        else:
+            cmd.Cmd.default(self, args)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
