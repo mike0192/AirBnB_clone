@@ -283,11 +283,11 @@ class HBNBCommand(cmd.Cmd):
             elif lists[1] == "count()":
                 self.count(lists[0])
             elif lists[1][:4] == "show":
-                self.do_show(self.devide_args(lists))
+                self.do_show(self.divide_args(lists))
             elif lists[1][:7] == "destroy":
-                self.do_destroy(self.devide_args(lists))
+                self.do_destroy(self.divide_args(lists))
             elif lists[1][:6] == "update":
-                line_args = self.devide_args(lists)
+                line_args = self.divide_args(lists)
                 if isinstance(line_args, list):
                     model_obj = storage.all()
                     k = args[0] + ' ' + args[1]
