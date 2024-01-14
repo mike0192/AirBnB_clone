@@ -7,7 +7,6 @@ from datetime import datetime
 import uuid
 
 
-
 class BaseModel:
     """ BaseModel class that with instance attributes and
         instance methods
