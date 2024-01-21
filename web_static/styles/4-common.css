@@ -1,6 +1,6 @@
 /*
- BODY FOR THE STATIC PAGE
- */
+  CSS FOR THE BODY AND THE CONTAINER CLASS
+  */
 
 body {
   margin: 0%;
@@ -8,4 +8,13 @@ body {
   font-size: 14px;
   font-family: "Circular", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #484848;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 30px auto;
+}
+
+strong {
+  font-weight: bold;
 }
