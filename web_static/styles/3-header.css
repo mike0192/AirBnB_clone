@@ -1,0 +1,10 @@
+/*
+ HEADER FOR THE STATIC PAGE
+ */
+
+header {
+  height: 70px;
+  width: 100%;
+  border-bottom: 1px #cccccc;
+  background: no-repeat white url("../images/logo.png") 20px center;
+}
